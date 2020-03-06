@@ -6,7 +6,7 @@ import { Text, TouchableOpacity, View, StyleSheet, Image } from 'react-native';
 export default class DexListItem extends React.Component {
     constructor(props) {
         super(props)
-        this.state = { loaded: false, navigation: props.navigation }
+        this.state = { loaded: false }
     }
 
     componentDidMount() {
@@ -18,17 +18,17 @@ export default class DexListItem extends React.Component {
     render() {
         if (this.state.loaded) {
             return (
-                <TouchableOpacity onPress={() => this.state.navigation.navigate("MonDetailScreen", {
+                <TouchableOpacity onPress={() => this.props.navigation.navigate("MonDetailScreen", {
                     mon: this.state.mon
                 })}>
                     <View style={styles.item}>
                         <View>
-                            <Text>{this.state.loaded ? this.state.mon.number : ""}</Text>
-                            <Text style={styles.title}>{this.state.loaded ? this.state.mon.name : "Loading..."}</Text>
+                            <Text>{this.state.mon.number}</Text>
+                            <Text style={styles.title}>{this.state.mon.name}</Text>
                         </View>
-                        <View>
+                        <View style={{flex: 1, justifyContent: 'center'}}>
                             <Image
-                                style={{ width: 80, height: 80, alignSelf: 'flex-end' }}
+                                style={{ width: 60, height: 60, alignSelf: 'flex-end', backgroundColor: '#f0f0f0', borderRadius: 100}}
                                 source={{ uri: 'https://' + this.state.mon.sprite }}
                             />
                         </View>
@@ -51,7 +51,10 @@ const styles = StyleSheet.create({
         padding: 20,
         marginVertical: 8,
         marginHorizontal: 16,
-        borderRadius: 15,
+        borderTopLeftRadius: 15,
+        borderBottomLeftRadius: 15,
+        borderTopRightRadius: 100,
+        borderBottomRightRadius: 100,
         flexDirection: 'row',
         ...Platform.select({
             ios: {

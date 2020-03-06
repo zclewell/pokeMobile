@@ -10,9 +10,14 @@ import TabbedDex from '../components/TabbedDex';
 export default class MonDetailScreen extends React.Component {
     constructor(props) {
         super(props)
-        console.log(props)
-        this.state = { mon: props.navigation.state.params.mon, navigation: props.navigation }
-        // props.navigation.setOptions({ headerTitle: this.state.mon.name })
+        this.state = { mon: props.navigation.state.params.mon }
+        props.navigation.setParams
+    }
+
+    static navigationOptions = ({ navigation }) => {
+        return {
+            title: navigation.getParam('mon').name
+        }
     }
 
     render() {

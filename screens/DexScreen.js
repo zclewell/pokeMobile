@@ -10,6 +10,13 @@ export default class DexScreen extends React.Component {
         this.state = { navigation: props.navigation }
         console.log(props)
     }
+
+    static navigationOptions = ({ navigation }) => {
+        return {
+            title: 'Dex'
+        }
+    }
+
     render() {
         return (
             <View style={styles.container}>

@@ -5,7 +5,6 @@ import { Image, Platform, StyleSheet, Text, TouchableOpacity, View } from 'react
 export default class TypeListItem extends React.Component {
     constructor(props) {
         super(props)
-        console.log(props)
         this.state = {type: props.type }
     }
 
