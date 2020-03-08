@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, View, Platform, StatusBar } from 'react-native';
+import { StyleSheet, View, Platform, StatusBar, Image, Text } from 'react-native';
 import _ from 'lodash';
 
 import StackNavigator from './navigation/StackNavigator';
@@ -40,6 +40,12 @@ export default class App extends React.Component {
       <View style={styles.container}>
         {Platform.OS === 'ios' && <StatusBar barStyle="default"/>}
         {this.state.loading || <StackNavigator screenProps={{ monDict: this.state.monDict }}/>}
+        {this.state.loading && 
+            <Image 
+              style={{flex: 1, width: null, height: null, resizeMode: 'contain'}} 
+              source={require('./assets/loading.gif')}
+            />}
+
       </View>
     );
   }
