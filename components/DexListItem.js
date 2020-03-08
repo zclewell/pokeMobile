@@ -11,22 +11,6 @@ export default class DexListItem extends React.Component {
         this.state = { loaded: true }
     }
 
-    // componentDidMount() {
-    //     this._isMounted = true;
-
-    //     let url = "http://192.168.86.28:8081/number/" + this.props.number;
-    //     let settings = { method: 'Get' };
-    //     fetch(url, settings).then(res => res.json()).then((json) => { 
-    //         if (this._isMounted) {
-    //             this.setState({ loaded: true, mon: json }) 
-    //         }
-    //     })
-    // }
-
-    // componentWillUnmount() {
-    //     this._isMounted = false;
-    // }
-
     render() {
         if (this.state.loaded) {
             if (this.props.mon && this.props.mon.name.includes(this.props.query)) {
