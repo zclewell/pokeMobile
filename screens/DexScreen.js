@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { StyleSheet, View, Text } from 'react-native';
-import { FlatList, ScrollView, TouchableOpacity, TextInput } from 'react-native-gesture-handler';
+import { FlatList, ScrollView, TextInput } from 'react-native-gesture-handler';
 import DexListItem from '../components/DexListItem';
 import { _ } from 'lodash';
 
@@ -9,7 +9,7 @@ import { GenSelector } from '../components/GenSelector';
 export default class DexScreen extends React.Component {
     constructor(props) {
         super(props)
-        this.state = { range : _.range(1,894), selected: "All"}
+        this.state = { range : _.range(1,894), selected: "All", query: ''}
         console.log(props)
     }
 
@@ -22,6 +22,11 @@ export default class DexScreen extends React.Component {
     render() {
         return (
             <View style={styles.container}>
+                <View style={styles.searchContainer}>
+                    <TextInput
+                        onChangeText={(text) => this.setState({ query: text })}
+                    />
+                </View>
                 <ScrollView 
                     horizontal={true}
                     showsHorizontalScrollIndicator={false}
@@ -36,12 +41,11 @@ export default class DexScreen extends React.Component {
                     <GenSelector text={"Gen VI"} onPress={() => this.setState({ range: _.range(650, 722), selected: "Gen VI" })} selected={this.state.selected}/>
                     <GenSelector text={"Gen VII"} onPress={() => this.setState({ range: _.range(722, 810), selected: "Gen VII" })} selected={this.state.selected}/>
                     <GenSelector text={"Gen VIII"} onPress={() => this.setState({ range: _.range(810, 891), selected: "Gen VIII" })} selected={this.state.selected}/>
-
                 </ScrollView>
                 <FlatList
-                    style={styles.flatList}
                     data={this.state.range}
-                    renderItem={({ item }) => <DexListItem key={item} number={item} navigation={this.props.navigation}/>}
+                    renderItem={(item, index) => <DexListItem mon={this.props.screenProps.monDict[item.item]} query={this.state.query} navigation={this.props.navigation}/>}
+                    keyExtractor={(item, index) => index}
                 />
             </View>
         );
